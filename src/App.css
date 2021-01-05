@@ -1,0 +1,20 @@
+
+:root {
+  --primary : "#FDE4DF";
+  --secondary : "#ed3275";
+  --borderRadius : 0;
+  --alter : "#721c24";
+  --success : "#155724";
+  --textNormal : "#333";
+  --textPrimary : "#ffffff"
+}
+*{
+  box-sizing:  border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  outline:  none;
+}
+.title {
+  color: var(--yellow-color);
+}

@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "paths": {
+        "@BaseTypes/*": ["src/submodules/base-model/*"],
+        "@Config/*": ["src/constants/*"],
+        "@components/*": ["src/components/*"],
+        "@pages/*": ["src/container/*"],
+        "@rematch/*": ["src/rematch/*"],
+      }
+    }
+  }

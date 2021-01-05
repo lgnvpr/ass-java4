@@ -1,0 +1,3 @@
+[submodule "src/submodules/base-model"]
+	path = src/submodules/base-model
+	url = https://github.com/hieuflynotes/base-model.git
