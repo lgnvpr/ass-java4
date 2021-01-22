@@ -1,12 +1,26 @@
 import * as links from "./links"
 import React from 'react';
 import { RouteComponentProps, StaticContext } from "react-router";
+import Home from "../../src/container/Home";
+import Login from "../../src/container/Login";
+import Register from "../../src/container/ Register";
 export const routes: Routers[] = [
-	// {
-	// 	url: links.DASHBOARD,
-	// 	component:  {} as any,
-	// 	exact: true,
-	// },
+	{
+		url: links.DASHBOARD,
+		component:  Home,
+		exact: true,
+	},
+	{
+		url: links.LOGIN,
+		component:  Login,
+		exact: true,
+	},
+	{
+		url: links.REGISTER,
+		component:  Register,
+		exact: true,
+	},
+
 ];
 
 interface Routers {

@@ -5,12 +5,13 @@ import { BaseModel } from "@BaseTypes/model/BaseModel";
 import { FindFilter, ListFilter } from "@BaseTypes/model/Filter";
 import { Paging } from "@BaseTypes/model/Paging";
 import { IBaseController } from "../../submodules/base-model/controller/IBaseController";
+import { PathNameService } from "../PathNameService";
 
 export class BaseController<T extends BaseModel> implements IBaseController<T> {
     public basePath: string;
     public client : AxiosInstance;
     public serviceURL : string; 
-	constructor(URL: string, basePath: string, appClient: any) {
+	constructor(URL: string, basePath: PathNameService, appClient: AxiosInstance) {
         this.basePath = basePath;
         this.serviceURL = URL ;
         this.client = appClient

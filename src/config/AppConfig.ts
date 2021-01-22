@@ -4,7 +4,7 @@ export interface IConfig {
 }
 
 const localConfig: IConfig = {
-	apiGatewayUrl: "http://localhost:3000",
+	apiGatewayUrl: "http://localhost:8080/luongnvpk01506",
 	applicationUrl: "http://localhost:3000",
 };
 

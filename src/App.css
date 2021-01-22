@@ -1,20 +1,539 @@
-
 :root {
-  --primary : "#FDE4DF";
-  --secondary : "#ed3275";
-  --borderRadius : 0;
-  --alter : "#721c24";
-  --success : "#155724";
-  --textNormal : "#333";
-  --textPrimary : "#ffffff"
+	--secondary: #ff9fa4;
+	--primary: #ed3275;
+	--warning: "";
+	--borderRadius: 10px;
+	--alter: #dc3545;
+	--warning: #ffc107;
+	--info: #17a2b8;
+	--success: #155724;
+	--textNormal: #333;
+	--textPrimary: #ffffff;
+	--bgWhite : #eff2f3;
+	--bold: 550;
+	--font-family-sans-serif: "Haas Grot Text R Web", 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+    --font-family-monospace: "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace";
 }
-*{
-  box-sizing:  border-box;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  outline:  none;
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	font-family: var(--font-family-sans-serif);
+}
+input {
+	border: 1px solid black;
+}
+.bg-primary {
+	background-color: var(--primary);
+}
+.bg-secondary {
+	background-color: var(--secondary);
+}
+.bg-warning {
+	background-color: var(--alter);
+}
+.bg-warning {
+	background-color: var(--warning);
+}
+.bg-info {
+	background-color: var(--info);
+}
+.bg-success {
+	background-color: var(--success);
 }
 .title {
-  color: var(--yellow-color);
+	color: var(--yellow-color);
 }
+.demo {
+	width: 100%;
+	height: 100%;
+  display: flex;
+  direction: row;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	padding: 30px;
+}
+.page{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+
+.c-button {
+  background-color: var(--primary);
+	padding: 15px;
+	color: var(--bgWhite);
+	cursor: pointer;
+  position: relative;
+  border-radius : var(--borderRadius);
+  font-weight: 600;
+}
+.c-button:hover {
+  background: var(--primary);
+	color: white;
+	transition: 0.2s;
+	font-weight: 700;
+}
+.c-button::after {
+	content: "";
+	width: 0%;
+	position: absolute;
+	border-radius: 100%;
+	height: 100%;
+	top: 0;
+	left: 50%;
+	transition: 0.2s;
+}
+.c-button:active:after {
+	content: "";
+	width: 100%;
+	position: absolute;
+	height: 100%;
+	background-color: rgba(225,225,225,0.2);
+	border-radius: 0%;
+	top: 0;
+	left: 0%;
+}
+
+.c-text-filed {
+	padding: 15px;
+	border: none;
+	border-width: 1px;
+	border-color: var(--primary);
+	border-style: solid;
+	border-radius: var(--borderRadius);
+}
+
+.c-text-filed:focus {
+	border-width: 2px;
+	border-radius: var(--borderRadius);
+}
+.outline-text-filed:focus .label-text-filed {
+	colort: var(--success);
+}
+
+.label-text-filed {
+	position: absolute;
+	top: calc(0px - 1rem + 10px);
+	color: var(--primary);
+	font-size: 0.8rem;
+	left: 10px;
+	background-color: white;
+	padding: 0px 5px 0px 5px;
+}
+.outline-text-filed {
+	position: relative;
+}
+.text-helper-text-filed {
+	color: var(--alter);
+	font-size: 0.8rem;
+	position: absolute;
+	right: 10px;
+	bottom: calc(0px - 1rem - 0px);
+}
+
+.c-checkbox {
+	text-rendering: auto;
+	color: var(--primary);
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: start;
+}
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+	input[type="checkbox"],
+	input[type="radio"] {
+		--active: var(--primary);
+		--active-inner: #fff;
+		--border: var(--primary);
+		-webkit-appearance: none;
+		-moz-appearance: none;
+    height: 22px;
+		outline: none;
+		display: inline-block;
+		vertical-align: top;
+		position: relative;
+		margin: 0;
+		cursor: pointer;
+		border: 1px solid var(--bc, var(--border));
+		background: var(--b, var(--background));
+		transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+	}
+	input[type="checkbox"]:after{
+    content: "";
+		display: block;
+		left: 0;
+    top: 0;
+    position: absolute;
+		transition: transform var(--d-t, 0.3s) var(--d-t-e, ease),
+			opacity var(--d-o, 0.2s);
+  }
+
+	input[type="checkbox"]:checked{
+    background: var(--active);
+		--b: var(--active);
+		--bc: var(--active);
+		--d-o: 0.3s;
+		--d-t: 0.6s;
+		--d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+  }
+
+  input[type="radio"]:checked:after {
+		content: "";
+		display: block;
+		left: 0;
+    top: 0;
+    position: absolute;
+    background-color: var(--active);
+		transition: transform var(--d-t, 0.3s) var(--d-t-e, ease),
+			opacity var(--d-o, 0.2s);
+	}
+	input[type="radio"]:checked {
+		--d-o: 0.3s;
+		--d-t: 0.6s;
+		--d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+	}
+
+	
+	input[type="checkbox"]:not(.switch),
+	input[type="radio"]:not(.switch) {
+		width: 21px;
+	}
+	input[type="checkbox"]:not(.switch):after,
+	input[type="radio"]:not(.switch):after {
+		opacity: var(--o, 2);
+	}
+	input[type="checkbox"]:not(.switch):checked,
+	input[type="radio"]:not(.switch):checked {
+		--o: 0.8;
+	}
+	input[type="checkbox"] + label,
+	input[type="radio"] + label {
+		font-size: 14px;
+		line-height: 21px;
+		display: inline-block;
+		vertical-align: top;
+		cursor: pointer;
+		margin-left: 4px;
+	}
+
+	input[type="checkbox"]:not(.switch) {
+		border-radius: 7px;
+	}
+	input[type="checkbox"]:not(.switch):after {
+		width: 5px;
+		height: 9px;
+		border: 2px solid var(--active-inner);
+		border-top: 0;
+		border-left: 0;
+		left: 6px;
+		top: 3px;
+		transform: rotate(var(--r, 20deg));
+	}
+	input[type="checkbox"]:not(.switch):checked {
+		--r: 43deg;
+	}
+	input[type="checkbox"].switch {
+		width: 38px;
+		border-radius: 11px;
+	}
+	input[type="checkbox"].switch:after {
+		left: 2px;
+		top: 2px;
+		border-radius: 50%;
+		width: 15px;
+		height: 15px;
+		background: var(--ab, var(--border));
+		transform: translateX(var(--x, 0));
+	}
+	input[type="checkbox"].switch:checked {
+		--ab: var(--active-inner);
+		--x: 17px;
+	}
+	input[type="checkbox"].switch:disabled:not(:checked):after {
+		opacity: 0.6;
+	}
+
+	input[type="radio"] {
+		border-radius: 50%;
+	}
+	input[type="radio"]:after {
+		width: 19px;
+		height: 19px;
+		border-radius: 50%;
+		opacity: 0;
+		transform: scale(var(--s, 0.7));
+	}
+	input[type="radio"]:checked {
+		--s: 0.5;
+	}
+}
+
+.bd-right{
+  border-right : 1px solid #333;
+}
+.flex{
+  display: flex;
+}
+
+.flex-center{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+.header-info{
+  display: flex;
+  direction: row;
+  justify-content: space-evenly;
+  background-color: #f6f6f6;
+  font-size: 0.8rem;
+  font-family: sans-serif
+}
+.list-item-header-info{
+  display:  flex;
+  padding : 7px
+}
+.item-header-info{
+  padding : 0px 7px 0px 7px;
+}
+.header-menu{
+	display: flex;
+	justify-content: space-evenly;
+	padding : 30px;
+	align-items: center;
+}
+.header-menu div> ul {
+	display: flex;
+	list-style: none;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.header-menu .list-menu > ul > li{
+	padding : 10px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.header-menu .list-menu > ul > li:hover {
+	border-bottom: 2px solid var(--primary);
+	color : var(--primary)
+}
+
+.slider-home{
+	width: 100%;
+}
+
+.slider-home > img{
+	width: 100%;
+}
+
+.list-rules{
+	display: flex;
+	justify-content: space-evenly;
+}
+.rules-item{
+	padding : 30px;
+	display: flex;
+	font-weight: bold;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	flex : 1
+}
+.rules-item:hover{
+	transition: .3s;
+	color : white
+}
+.rules-item::before{
+	content: "";
+	z-index: -1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 0%;
+	background-color: var(--primary);
+	border-radius : 50px;
+}
+.rules-item:hover::before{
+	transition: 0.5s;
+	height: 100%;
+	border-radius: 0px;
+}
+
+
+
+.footer{
+	padding : 120px 0px;
+	background-color: #282828;
+}
+
+.footer-top{
+	display: flex;
+	justify-content: space-evenly;
+	color : var(--textPrimary);
+}
+
+/* login */
+.page-login {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	background: linear-gradient(146deg, rgba(255,159,164,0.938813025210084) 35%, rgba(255,53,233,1) 100%);
+
+	height: 100vh;
+}
+.fr-login{
+	border: 1px solid #3333;
+    padding : 50px;
+    border-radius: var(--borderRadius);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+}
+
+.title-login{
+	padding : 15px;
+}
+.fr-input-login{
+	display: flex;
+	justify-content: center;
+	padding : 15px;
+	flex-direction: column;
+}
+.text-resister{
+	display: flex;
+	justify-content: center;
+	font-size: small;
+}
+
+.link-login{
+	padding: 0px 5px;
+	cursor: pointer;
+	color: var(--info);
+}
+
+/* product */
+.title-list-product{
+	padding : 30px;
+}
+.fr-list-product{
+	display: flex;
+	justify-content: center;
+}
+.list-product-home{
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.fr-product{
+	margin: 40px;
+	width: 260px;
+	height: 320px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	background-color: white;
+}
+
+.fr-product::before{
+	content: "";
+	z-index: -1;
+	top : 0;
+	left: 50%;
+	position: absolute;
+	width: 0%;
+	height: 100.5%;
+	background-color: var(--primary);
+}
+
+.fr-product:hover::before{
+	transition: 1s;
+	width: 100%;
+	left: 0%;
+}
+
+
+.img-product{
+	width: 100%;
+	height: 260px;
+	overflow: hidden;
+}
+
+.img-product img{
+	width: 100%;
+}
+
+.info-product{
+	display: flex;
+	flex : 1;
+	justify-content: space-between;
+}
+
+.info-product >div{
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+	flex : 1;
+} 
+
+.name-product{
+	font-size: 1.2rem;
+}
+
+.price-product{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+.main-price-product{
+	color : var(--alter);
+	font-size: 1.2rem;
+}
+
+.sale-price-product{
+	font-size: .8rem;
+	text-decoration: line-through;
+}
+
+.icon-add-cart{
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	bottom: 70px;
+	right: 10px;
+	border-radius: 50%;
+	background-color: white;
+	cursor: pointer;
+}
+
+.icon-add-cart:hover{
+	transition: 0.7s;
+	background-color: var(--primary);
+	color: white;
+}
+
+
+
