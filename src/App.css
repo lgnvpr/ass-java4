@@ -128,6 +128,10 @@ input {
 }
 .outline-text-filed {
 	position: relative;
+	display: flex;
+}
+.icon-c-text-filed{
+	position: absolute;
 }
 .text-helper-text-filed {
 	color: var(--alter);

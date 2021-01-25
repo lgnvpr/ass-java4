@@ -7,17 +7,17 @@ import Register from "../../src/container/ Register";
 export const routes: Routers[] = [
 	{
 		url: links.DASHBOARD,
-		component:  Home,
+		component:  ()=><Home></Home>,
 		exact: true,
 	},
 	{
 		url: links.LOGIN,
-		component:  Login,
+		component:  ()=> <Login></Login>,
 		exact: true,
 	},
 	{
 		url: links.REGISTER,
-		component:  Register,
+		component:  ()=><Register></Register>,
 		exact: true,
 	},
 

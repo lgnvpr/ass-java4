@@ -1,9 +1,14 @@
 import Login from "./container/Login";
-import { createBrowserHistory } from "history";
-import React, { useState } from "react";
+import { BrowserHistory, createBrowserHistory, State } from "history";
+import React, { useEffect, useState } from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import "./App.css";
 import { routes } from "./constanst/routers";
+import Button from "./my-component/Button";
+import { REGISTER } from "./constanst/links";
+import Notification from "./componet/genaral-component/Notication";
+import { loadingTop } from "@rematch/LoadingTop";
+import AppLoadingTop from "./componet/genaral-component/LoaddingTop";
 
 export const history = createBrowserHistory({});
 
@@ -11,23 +16,24 @@ function App() {
 	const [isAuthen, setIsAuthen] = useState<boolean>(true);
 	return isAuthen ? (
 		<div>
-			<Router history={history}>
-				<Switch>
-					{routes.map((route) => {
-						return (
-							<Route
-								exact={route.exact}
-								component={route.component}
-								path={route.url}
-								sensitive={route.sensitive}
-								strict={route.strict}
-							/>
-						);
-					})}
-				</Switch>
-			</Router>
+			<AppLoadingTop></AppLoadingTop>
+			<Notification></Notification>
+			<Switch>
+				{routes.map((route) => {
+					return (
+						<Route
+							exact={route.exact}
+							component={route.component}
+							render={({ match: { url } }) => route.component}
+							path={route.url}
+						/>
+					);
+				})}
+			</Switch>
 		</div>
-	): <Login></Login>
+	) : (
+		<Login></Login>
+	);
 }
 
 export default App;

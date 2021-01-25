@@ -7,7 +7,7 @@ import { AppState } from "../../rematch/store";
 const useStyles = makeStyles(theme=>({
 	load : {
 		position : "fixed",
-		top : 64,
+		top : 0,
 		left : 0,
 		width : "100%"
 	}

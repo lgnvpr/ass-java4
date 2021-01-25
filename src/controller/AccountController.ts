@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { BaseModel } from "@BaseTypes/model/BaseModel";
 import { AxiosInstance } from "axios";
-import { BaseController } from "./fake/BaseModel";
+import { Account } from "src/submodules/model-shopping/model/Account";
+import { BaseController } from "./BaseController";
 import { PathNameService } from "./PathNameService";
 
 export class AccountController extends BaseController<Account> {
@@ -12,15 +13,14 @@ export class AccountController extends BaseController<Account> {
 	) {
 		super(serviceURL, serviceName, appClient);
 	}
-	
-	// `${this.serviceURL}/${this.basePath}/login`
+
+	//
 	async login(username: string, password: string) {
-		// this.client.head
 		return this.client
-			.get("http://localhost:8080/test/luong", {
-				data: { username, password },
+			.get(`${this.serviceURL}/${this.basePath}/login`, {
+				params: { username, password },
 			})
-			.then((res) => res.data)
+			.then((res) => res)
 			.catch((res) => null);
 	}
 }
