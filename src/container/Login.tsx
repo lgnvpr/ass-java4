@@ -17,7 +17,7 @@ import {
 	provideGitHub,
 } from "src/config/FirebaseConfig";
 import firebase from "firebase";
-import { history } from "src/App";
+// import { history } from "src/App";
 
 const validate = yup.object({
 	username: yup
@@ -28,7 +28,7 @@ const validate = yup.object({
 	password: yup.string().trim().required("Không được để trống"),
 });
 export default function Login() {
-	// const history = useHistory();
+	const history = useHistory();
 	provideGitHub.setCustomParameters({
 		allow_signup: "false",
 	});
@@ -97,6 +97,7 @@ export default function Login() {
 							Login with Facebook
 						</Button>
 					</div> */}
+
 					<div className="fr-input-login">
 						<Button
 							onClick={() => {
@@ -110,6 +111,7 @@ export default function Login() {
 							Login with google
 						</Button>
 					</div>
+
 					<div className="fr-input-login">
 						<TextFiled
 							name="username"
@@ -144,6 +146,7 @@ export default function Login() {
 							Đăng nhập
 						</Button>
 					</div>
+
 					<div className="text-resister">
 						Bạn chưa có tài khoản ?
 						<div

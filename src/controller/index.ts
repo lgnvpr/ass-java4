@@ -3,6 +3,7 @@ import appConfig from "../config/AppConfig";
 import { dispatch } from "../rematch/store";
 import { AccountController } from "./AccountController";
 import { PathNameService } from "./PathNameService";
+import { ProductController } from "./ProductController";
 
 export const URL = appConfig.apiGatewayUrl;
 
@@ -68,5 +69,12 @@ appClient.interceptors.response.use(
 export const accountController = new AccountController(
 	appConfig.apiGatewayUrl,
 	PathNameService.account,
+	appClient
+);
+
+
+export const productController = new ProductController(
+	appConfig.apiGatewayUrl,
+	PathNameService.product,
 	appClient
 );

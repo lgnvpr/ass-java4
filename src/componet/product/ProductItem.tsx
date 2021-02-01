@@ -1,6 +1,10 @@
 import React from 'react'
 import {AiOutlineShoppingCart} from "react-icons/ai"
-export default function Product() {
+import { Product } from 'src/submodules/model-shopping/model/Product'
+type Props = {
+    item : Product
+}
+export default function ProductItem(props : Props) {
     return (
         <div className = "fr-product">
             <div className = "icon-add-cart">
@@ -9,15 +13,15 @@ export default function Product() {
                 />
             </div>
             <div className = "img-product">
-                <img src = "https://vanluongg.github.io/vanluong/img/home/img-product/1.jpg"></img>
+                <img src = {props.item.image}></img>
             </div>
             <div className = "info-product">
                 <div className = "name-product">
-                    Áo dài tay
+                    {props.item.name}
                 </div>
                 <div className = "price-product">
-                    <div className= "main-price-product">510,0000</div>
-                    <div className= "sale-price-product">510,0000</div>
+                    <div className= "main-price-product">{props.item.price}</div>
+                    <div className= "sale-price-product">{props.item.price}</div>
                 </div>
             </div>
         </div>

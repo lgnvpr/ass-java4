@@ -1,3 +1,4 @@
 export enum PathNameService {
-    account = "account"
+    account = "account",
+    product = "product"
 }
