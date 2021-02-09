@@ -4,6 +4,7 @@ import { RouteComponentProps, StaticContext } from "react-router";
 import Home from "../../src/container/Home";
 import Login from "../../src/container/Login";
 import Register from "../../src/container/ Register";
+import DetailProduct from "../../src/container/DetailProduct";
 export const routes: Routers[] = [
 	{
 		url: links.DASHBOARD,
@@ -18,6 +19,11 @@ export const routes: Routers[] = [
 	{
 		url: links.REGISTER,
 		component:  ()=><Register></Register>,
+		exact: true,
+	},
+	{
+		url: links.ProductDetail,
+		component:  ()=><DetailProduct/>,
 		exact: true,
 	},
 

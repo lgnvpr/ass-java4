@@ -1,5 +1,5 @@
 import React from 'react'
-import {AiOutlineShoppingCart} from "react-icons/ai"
+import {AiFillEye} from "react-icons/ai"
 import { Product } from 'src/submodules/model-shopping/model/Product'
 type Props = {
     item : Product
@@ -8,7 +8,7 @@ export default function ProductItem(props : Props) {
     return (
         <div className = "fr-product">
             <div className = "icon-add-cart">
-                <AiOutlineShoppingCart
+                <AiFillEye
 								fontSize = {22}
                 />
             </div>

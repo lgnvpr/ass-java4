@@ -1,122 +1,101 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {AiOutlineShoppingCart} from "react-icons/ai"
-import {FaUserAlt} from "react-icons/fa"
 type Props = {
 	children: React.ReactElement;
 };
 export default function ContainerGeneral(props: Props) {
 	return (
 		<div>
-			<div className="flex-col">
-				<div className="header-info ">
-					<div className="list-item-header-info">
-						<div className="bd-right item-header-info">
-							PHONE: +01 256 25 235
-						</div>
-						<div className="item-header-info">
-							EMAIL: INFO@EISER.COM
-						</div>
+			<nav className="fr-menu">
+				<div className="menu">
+					<div className="menu-item">
+						<img src="https://evashopping.vn/images/logo.png"></img>
 					</div>
-
-					<div className="list-item-header-info">
-						<div className="bd-right item-header-info">
-							GIFT CARD
-						</div>
-						<div className="bd-right item-header-info">
-							TRACK ORDER
-						</div>
-						<div className="item-header-info">CONTACT US</div>
+					<div className="menu-item">
+						<p>Đồ bơi nam</p>
+					</div>
+					<div className="menu-item">
+						<p>Đồ bơi nữ</p>
+					</div>
+					<div className="menu-item">
+						<p>Đồ bơi trẻ em</p>
+					</div>
+					<div className="menu-item">
+						<p>Đồ bơi đi biển</p>
+					</div>
+					<div className="menu-item">
+						<p>Phụ kiện</p>
+					</div>
+					<div className="menu-item">
+						<p>Big size</p>
+					</div>
+					<div className="menu-item">
+						<p>Login</p>
 					</div>
 				</div>
-
-				<div className="header-menu">
-					<div>
-						<img src="https://vanluongg.github.io/vanluong/img/home/logo.png"></img>
-					</div>
-					<div className="list-menu">
-						<ul>
-							<li>Home</li>
-							<li>Shop</li>
-							<li>Blog</li>
-							<li>Page</li>
-							<li>Contact</li>
-						</ul>
-					</div>
-					<div>
-						<ul>
-							<li>
-							<AiOutlineShoppingCart
-								fontSize = {22}
+			</nav>
+			<div style ={{padding : 50}}/>
+			<footer>
+				<div className="policy-home">
+					<div className="policy-item">
+						<div className="img-policy-item">
+							<img
+								src="https://evashopping.vn/images/giao-hang.png"
+								alt=""
 							/>
-							</li>
-							<li>
-								<FaUserAlt fontSize={20} />
-							</li>
-							<li>
-								<FontAwesomeIcon icon={["fas", "coffee"]} />
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div>{props.children}</div>
-
-			<div className="footer">
-				<div className="footer-top">
-					<div className="logo-footer">
-						<img
-							src = "https://vanluongg.github.io/vanluong/img/home/logo-light-footer.png"
-						/>
-					</div>
-				</div>
-				<div className="info-footer">
-					<div className = "fr-info-item-footer">
-						<div className="header-info-footer">Giới thiệu</div>
-						<div className="content">
-							Chúng tôi luôn mang đến cho bạn những sản phẩm với
-							giá và chất lượng tốt nhất, miễn là bạn thích chúng
-							tôi sẵn sàng phục vụ bạn, với tiêu chí về uy tín và
-							chất lượng sản phẩm được đưa lên hàng đầu !!
+						</div>
+						<div className="content-main">
+							<div className="title-policy">
+								Miễn phí giao hàng
+							</div>
+							<div className="content-policy">
+								Đơn hàng 1.000k (HCM đơn 700k)
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<div className="info-footer">
-					<div className = "fr-info-item-footer">
-						<div className="header-info-footer">Giới thiệu</div>
-						<div className="content">
-							<div>
-								<ul>
-									<li>Về chúng tôi</li>
-									<li>Theo dõi đơn hàng</li>
-									<li>Đơn hàng trả</li>
-									<li>Công việc</li>
-									<li>Đang chuyển hàng</li>
-									<li>Bài viết</li>
-									<li>Đối tác</li>
-								</ul>
+					<div className="policy-item">
+						<div className="img-policy-item">
+							<img
+								src="https://evashopping.vn/images/ho-tro.png"
+								alt=""
+							/>
+						</div>
+						<div className="content-main">
+							<div className="title-policy">Hỗ trợ trực tiếp</div>
+							<div className="content-policy">
+								Phục vụ khách hàng tận tình
+							</div>
+						</div>
+					</div>
+					<div className="policy-item">
+						<div className="img-policy-item">
+							<img
+								src="https://evashopping.vn/images/doi-tra.png"
+								alt=""
+							/>
+						</div>
+						<div className="content-main">
+							<div className="title-policy">Hỗ trợ đổi hàng</div>
+							<div className="content-policy">
+								Trong 7 ngày (nếu sản phẩm có lỗi)
+							</div>
+						</div>
+					</div>
+					<div className="policy-item">
+						<div className="img-policy-item">
+							<img
+								src="https://evashopping.vn/images/thanh-toan.png"
+								alt=""
+							/>
+						</div>
+						<div className="content-main">
+							<div className="title-policy">Thanh toán COD</div>
+							<div className="content-policy">
+								Thanh toán khi nhận hàng
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div className="info-footer">
-					<div className = "fr-info-item-footer">
-						<div className="header-info-footer">Giới thiệu</div>
-						<div className="content">
-							Chúng tôi luôn mang đến cho bạn những sản phẩm với
-							giá và chất lượng tốt nhất, miễn là bạn thích chúng
-							tôi sẵn sàng phục vụ bạn, với tiêu chí về uy tín và
-							chất lượng sản phẩm được đưa lên hàng đầu !!
-						</div>
-					</div>
-				</div>
-
-
-
-
-			</div>
+			</footer>
 		</div>
 	);
 }
