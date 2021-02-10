@@ -1,14 +1,15 @@
 import * as links from "./links"
 import React from 'react';
 import { RouteComponentProps, StaticContext } from "react-router";
-import Home from "../../src/container/Home";
+import Home from "../container/ProductPage";
 import Login from "../../src/container/Login";
 import Register from "../../src/container/ Register";
-import DetailProduct from "../../src/container/DetailProduct";
+import ProductPage from "../container/ProductPage";
+import ProductDetail from "../container/ProductDetail";
 export const routes: Routers[] = [
 	{
-		url: links.DASHBOARD,
-		component:  ()=><Home></Home>,
+		url: links.ListProduct,
+		component:  ()=><ProductPage></ProductPage>,
 		exact: true,
 	},
 	{
@@ -23,7 +24,7 @@ export const routes: Routers[] = [
 	},
 	{
 		url: links.ProductDetail,
-		component:  ()=><DetailProduct/>,
+		component:  ()=><ProductDetail/>,
 		exact: true,
 	},
 
