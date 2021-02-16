@@ -24,10 +24,16 @@ export default function ProductDetail() {
 								Chọn màu :{" "}
 								<OptionColor
 									color={["red", "blue", "orange", "black"]}
-                                    colorSelected = "red"
+									colorSelected="red"
 								/>
 							</div>
-							<div className="option-color">Chọn size :<OptionSize  sizeSelected = "X" sizes = {["XL", "X", "M"]}/> </div>
+							<div className="option-color">
+								Chọn size :
+								<OptionSize
+									sizeSelected="X"
+									sizes={["XL", "X", "M"]}
+								/>{" "}
+							</div>
 							<div className="order-product-detail">
 								<button className="c-button">
 									Đặt hang ngay

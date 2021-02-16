@@ -6,10 +6,16 @@ import Login from "../../src/container/Login";
 import Register from "../../src/container/ Register";
 import ProductPage from "../container/ProductPage";
 import ProductDetail from "../container/ProductDetail";
+import CartPage from "../container/CartPage";
 export const routes: Routers[] = [
 	{
 		url: links.ListProduct,
 		component:  ()=><ProductPage></ProductPage>,
+		exact: true,
+	},
+	{
+		url: links.CartProduct,
+		component:  ()=><CartPage></CartPage>,
 		exact: true,
 	},
 	{

@@ -287,6 +287,33 @@ input {
 	}
 }
 
+.page-login{
+	display: grid;
+	align-items: center;
+	height: 100vh;
+	justify-content: center;
+	background: var(--background);
+	text-align: center;
+}
+.fr-login{
+	background-color: white;
+	padding : 40px 80px;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	grid-gap: 40px;
+}
+.fr-input-login{
+	display: grid;
+	align-items: center;
+	grid-gap : 30px;
+	/* background-color: red; */
+}
+
+.link-login{
+	color : var(--primary);
+	cursor: pointer;
+}
 .fr-menu {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
@@ -536,3 +563,140 @@ input {
 	margin : 0px 1px;
 	cursor: pointer;
 }
+
+
+/* cart */
+
+.list-cart{
+	display: grid;
+	justify-items: center;
+}
+.delete-cart{
+	width: 100%;
+	padding : 5px;
+	background: none;
+	cursor: pointer;
+}
+.delete-cart:hover{
+	color : var(--alter)
+}
+.cart-product{
+	display: grid;
+	grid-template-columns: 90px 1fr 1fr;
+	grid-template-rows: repeat(auto ,150px);
+	padding : 5px;
+	background-color: white;
+	margin: 5px 0px;
+}
+
+.cart-product >div{
+	padding : 10px
+}
+
+.list-cart img{
+	width: 100%;
+}
+.input-change-amount{
+	height: 30px;
+	width: 30px;
+	border : none;
+	text-align: center;
+}
+.btn-change-amount{
+	height: 30px;
+	width: 30px;
+	cursor: pointer;
+}
+.action-price{
+	display: grid;
+	align-items: center;
+	justify-items: center;
+}
+.info-product-cart{
+	display: grid;
+	grid-gap : 10px;
+	align-items: flex-start;
+}
+.info-product-cart >div{
+	padding : 10px 0px;
+	align-self: start;
+	
+}
+
+.price-cart{
+	color : var(--alter)
+}
+
+.fr-sum-price-cart{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	font-weight: 550;
+	
+}
+.fr-sum-price-cart >div{
+	padding : 10px
+}
+
+/* product detail */
+
+.info-product-detail {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 20px;
+}
+.img-product-detail {
+	display: grid;
+	justify-self: flex-end;
+}
+.content-detail {
+	display: grid;
+	justify-self: flex-start;
+	align-items: flex-start;
+
+}
+
+.name-product-detail {
+	font-size: 2rem;
+	font-weight: 600;
+}
+.price-product-detail {
+	color: var(--primary);
+	font-size: 1.5rem;
+}
+.info-policy-page-detail{
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	grid-row-gap:  20px;
+	padding : 20px 0px;
+}
+.title-policy-product{
+
+}
+.content-policy-product{
+	font-size: 0.8rem;
+	color : #333
+}
+.order-product-detail{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px ;
+
+}
+
+.option-color{
+	display: grid;
+	grid-template-columns: 90px 1fr;
+	align-items: center;
+	grid-column-gap:10px ;
+	
+}
+
+.btn-color-option{
+	border-radius: 50%;
+	height: 30px;
+	width: 30px;
+	margin : 0px 1px;
+	cursor: pointer;
+}
+
+
