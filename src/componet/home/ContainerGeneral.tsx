@@ -33,7 +33,7 @@ export default function ContainerGeneral(props: Props) {
 					</div>
 				</div>
 			</nav>
-			<div style={{ padding: 50 }} />
+			<div style={{ padding: 35 }} />
 
 			{props.children}
 

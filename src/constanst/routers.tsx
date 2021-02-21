@@ -7,6 +7,8 @@ import Register from "../../src/container/ Register";
 import ProductPage from "../container/ProductPage";
 import ProductDetail from "../container/ProductDetail";
 import CartPage from "../container/CartPage";
+import InfoCustomer from "../container/InfoCustomer";
+import ConfirmCart from "../container/ConfirmCart";
 export const routes: Routers[] = [
 	{
 		url: links.ListProduct,
@@ -33,6 +35,18 @@ export const routes: Routers[] = [
 		component:  ()=><ProductDetail/>,
 		exact: true,
 	},
+	{
+		url: links.inputInfoCustomer,
+		component:  ()=><InfoCustomer/>,
+		exact: true,
+	},
+	{
+		url: links.confirmCart,
+		component:  ()=><ConfirmCart/>,
+		exact: true,
+	},
+
+	
 
 ];
 

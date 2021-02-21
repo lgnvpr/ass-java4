@@ -25,9 +25,8 @@ export class BaseController<T> implements IBaseController<T>{
   public list(params: ListFilter<T>): Promise<Paging<T>> {
     params = { ...params, sort: this.convertSort(params.sort)};
     return this.client
-      .get(`${this.serviceURL}/${this.basePath}`, {
-        params: params,
-      })
+      .post(`${this.serviceURL}/${this.basePath}/list`, params,
+      )
       .then((res) => {
         return res.data;
       });
@@ -59,7 +58,9 @@ export class BaseController<T> implements IBaseController<T>{
   */
   public async  get(filter: GetFilter): Promise<T| T[] | null> {
     return this.client
-      .get(`${this.serviceURL}/${this.basePath}/${filter.id}`)
+      .get(`${this.serviceURL}/${this.basePath}/get`, {
+        params : {id : filter.id}
+      })
       .then((res) => {
         return res.data;
       });
@@ -67,7 +68,9 @@ export class BaseController<T> implements IBaseController<T>{
 
   public delete(id: string): Promise<T> {
     return this.client
-      .delete(`${this.serviceURL}/${this.basePath}/${id}`)
+      .delete(`${this.serviceURL}/${this.basePath}`, {
+        params : {id}
+      })
       .then((res) => {
         dispatch.notification.success("Xóa thành công !!!");
         return res.data;

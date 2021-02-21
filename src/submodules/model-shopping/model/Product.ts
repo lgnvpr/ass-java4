@@ -1,5 +1,6 @@
 import { BaseModel } from "@BaseTypes/model/BaseModel";
 import { CategoryProduct } from "./CategoryProduct";
+import { ImageProduct } from "./ImageProduct";
 
 export class Product extends BaseModel {
 	name?: string;
@@ -10,4 +11,5 @@ export class Product extends BaseModel {
 	percentSale?: number;
 	image?: string;
 	categoryProduct?: CategoryProduct;
+	productImage ? :ImageProduct[]
 }

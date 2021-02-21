@@ -3,6 +3,7 @@ import appConfig from "../config/AppConfig";
 import { dispatch } from "../rematch/store";
 import { AccountController } from "./AccountController";
 import { PathNameService } from "./PathNameService";
+import { ProductCartController } from "./ProductCartController";
 import { ProductController } from "./ProductController";
 
 export const URL = appConfig.apiGatewayUrl;
@@ -76,5 +77,17 @@ export const accountController = new AccountController(
 export const productController = new ProductController(
 	appConfig.apiGatewayUrl,
 	PathNameService.product,
+	appClient
+);
+
+export const categoryController = new ProductController(
+	appConfig.apiGatewayUrl,
+	PathNameService.category,
+	appClient
+);
+
+export const cartProductController = new ProductCartController(
+	appConfig.apiGatewayUrl,
+	PathNameService.cartProduct,
 	appClient
 );

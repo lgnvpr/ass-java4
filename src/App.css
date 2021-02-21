@@ -320,6 +320,7 @@ input {
 	justify-self: center;
 	box-shadow: 0px 6px 12px rgb(0 0 0/18%);
 	position: fixed;
+	z-index: 10;
 	background-color: white;
 }
 .menu {
@@ -699,4 +700,26 @@ input {
 	cursor: pointer;
 }
 
-
+/* info customer  */
+.container-info-customer{
+	display: grid;
+	justify-content: center;
+	padding :  100px 0px;
+	background: var(--background);
+}
+.fr-info{
+	background-color: white;
+	display: grid;
+	align-items: center;
+	justify-items: center;
+	grid-row-gap: 30px;
+	padding : 50px;
+}
+.fr-info >h2{
+	font-size: 1.5rem;
+	text-transform: uppercase;
+}
+.fr-input-info-customer{
+	display: grid;
+	grid-row-gap :20px
+}
