@@ -9,6 +9,7 @@ import ProductDetail from "../container/ProductDetail";
 import CartPage from "../container/CartPage";
 import InfoCustomer from "../container/InfoCustomer";
 import ConfirmCart from "../container/ConfirmCart";
+import ProductPageAdmin from "../container/ProductPageAdmin";
 export const routes: Routers[] = [
 	{
 		url: links.ListProduct,
@@ -45,6 +46,12 @@ export const routes: Routers[] = [
 		component:  ()=><ConfirmCart/>,
 		exact: true,
 	},
+	{
+		url: links.productAdmin,
+		component:  ()=><ProductPageAdmin/>,
+		exact: true,
+	},
+
 
 	
 

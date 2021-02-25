@@ -29,6 +29,7 @@
 	outline: none;
 	border: none;
 	font-family: var(--font-family-sans-serif);
+	
 }
 input {
 	border: 1px solid black;
