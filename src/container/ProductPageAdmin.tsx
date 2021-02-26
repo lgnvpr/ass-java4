@@ -20,11 +20,13 @@ import _ from "lodash";
 import PageAdmin from "./PageAdmin";
 import ProductAdmin from "src/componet/product/ProductAdmin";
 import clsx from "clsx";
+import PopUpConfirm from "src/componet/genaral-component/DialogConfirm";
+import PopupProductAdmin from "src/componet/product/PopupProductAdmin";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "grid",
-		gridGap: 10,
+		gridGap: 40,
 		gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
 		gridAutoRows: "repeat(auto, 210px)",
 		padding: 10,
@@ -51,6 +53,7 @@ export default function ProductPageAdmin() {
 
 	const [query, setQuery] = useState<ListFilter<Product>>({
 		pageSize: 20,
+		sort : ["-created_at"]
 	});
 
 	function updateCategorySelected(item: CategoryProduct) {
@@ -86,6 +89,40 @@ export default function ProductPageAdmin() {
 		[]
 	);
 
+	const [showForm, setShowForm] = useState<boolean>(false);
+	const [showConfirm, setShowConfirm] = useState<boolean>(false);
+	const [selected, setSelected] = useState<Product>(
+		{} as Product
+	);
+
+	function onConfirm(item: Product) {
+		setSelected(item);
+		setShowConfirm(true);
+	}
+
+	function onCancelConfirm() {
+		setShowConfirm(false);
+	}
+	function onDelete() {
+		productController.delete(selected.id || "").then(() => {
+			setQuery({ ...query });
+		});
+		setShowConfirm(false);
+	}
+	function onCloseForm() {
+		setShowForm(false);
+	}
+	function onSave(customer: Product) {
+		productController.save(customer).then(() => {
+			setQuery({ ...query });
+			setShowForm(false);
+		});
+	}
+	function onCreateOrUpdate(position: Product) {
+		setSelected(position);
+		setShowForm(true);
+	}
+
 	useEffect(() => {
 		productController.list(query).then((res) => {
 			setListProduct(res);
@@ -96,8 +133,25 @@ export default function ProductPageAdmin() {
 	}, [query]);
 	return (
 		<PageAdmin>
+			<PopUpConfirm
+				isDisplay={showConfirm}
+				onCancel={onCancelConfirm}
+				onDelete={onDelete}
+			/>
+			<PopupProductAdmin
+				category = {category || []}
+				isDisplay = {showForm}
+				obj = {selected}
+				onCancel ={onCloseForm}
+				onSave = {onSave}
+			/>
 			<Grid container>
 				<Typography variant={"h5"}>Product</Typography>
+				<Button
+					onClick = {()=>{
+						onCreateOrUpdate({})
+					}}
+				>Thêm</Button>
 				<Grid container justify="space-evenly" className = {clsx(classes.filterContainer)}>
 					<Grid>
 						{category?.map((item) => {
@@ -139,7 +193,10 @@ export default function ProductPageAdmin() {
 				</Grid>
 				<Grid className={clsx(classes.root)} container>
 					{listProduct.rows?.map((item) => {
-						return <ProductAdmin item={item} />;
+						return <ProductAdmin item={item} 
+							onDelete = {onConfirm}
+							onEdit = {onCreateOrUpdate}
+						/>;
 					})}
 				</Grid>
 			</Grid>

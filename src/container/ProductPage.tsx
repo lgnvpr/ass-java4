@@ -99,7 +99,7 @@ export default function ProductPage() {
 								}}>
 									<div className="product">
 										<div className="img-product">
-											<img src={item.productImage?.length ? item.productImage[0].link :item.image} alt="" />
+											<img src={item.productImage?.length ? item.image :item.image} alt="" />
 										</div>
 										<div className="content-product">
 											<div className="name-price-product">
