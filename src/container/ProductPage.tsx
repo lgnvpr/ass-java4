@@ -8,44 +8,74 @@ import ProductItem from "src/componet/product/ProductItem";
 import { categoryController, productController } from "src/controller";
 import { CategoryProduct } from "src/submodules/model-shopping/model/CategoryProduct";
 import { Product } from "src/submodules/model-shopping/model/Product";
-import {useHistory} from "react-router"
-import { TextField } from "@material-ui/core";
+import { useHistory } from "react-router";
+import { Button, FormControl, Grid, InputLabel, makeStyles, OutlinedInput, TextField } from "@material-ui/core";
 import _ from "lodash";
+import clsx from "clsx";
+import SearchIcon from "@material-ui/icons/Search";
+
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		display: "grid",
+		gridGap: 40,
+		gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+		gridAutoRows: "repeat(auto, 510px)",
+	},
+	filterContainer: {
+		paddingBottom: 50,
+	},
+	buttonFilterCategory: {
+		marginLeft: 10,
+		marginBottom: 10,
+	},
+	pagination: {
+		paddingTop: 50,
+		paddingBottom: 50,
+	},
+}));
 
 export default function ProductPage() {
-	const history = useHistory()
+	const history = useHistory();
+	const classes = useStyles();
 	const [listProduct, setListProduct] = useState<Paging<Product>>({
 		pageSize: 20,
 	});
 
-	const [categorySelected, setCategorySelected] = useState<CategoryProduct[]>();
-	
+	const [categorySelected, setCategorySelected] = useState<
+		CategoryProduct[]
+	>();
+
 	const [category, setCategory] = useState<CategoryProduct[]>();
-	
 
 	const [query, setQuery] = useState<ListFilter<Product>>({
 		pageSize: 20,
 	});
 
-	function updateCategorySelected(item: CategoryProduct){
-		let getCategorySelected = [...categorySelected || []];
-		const checkExit = getCategorySelected.findIndex(cate => cate.id == item.id);
-		if(checkExit>=0){
-			getCategorySelected =  getCategorySelected.filter(cate => cate.id !== item.id)
-		}
-		else{
+	function updateCategorySelected(item: CategoryProduct) {
+		let getCategorySelected = [...(categorySelected || [])];
+		const checkExit = getCategorySelected.findIndex(
+			(cate) => cate.id == item.id
+		);
+		if (checkExit >= 0) {
+			getCategorySelected = getCategorySelected.filter(
+				(cate) => cate.id !== item.id
+			);
+		} else {
 			getCategorySelected.push(item);
 		}
 		setCategorySelected(getCategorySelected);
 		setQuery({
 			...query,
-			filter : [
+			filter: [
 				{
-					filed : "categoryProductId",
-					value : getCategorySelected?.map(cate => cate.id || "") ||[""]
-				}
-			]
-		})
+					filed: "categoryProductId",
+					value: getCategorySelected?.map(
+						(cate) => cate.id || ""
+					) || [""],
+				},
+			],
+		});
 	}
 
 	const onQueryChanged = useCallback(
@@ -59,9 +89,9 @@ export default function ProductPage() {
 		productController.list(query).then((res) => {
 			setListProduct(res);
 		});
-		categoryController.find().then(item=>{
-			setCategory(item)
-		})
+		categoryController.find().then((item) => {
+			setCategory(item);
+		});
 	}, [query]);
 	return (
 		<ContainerGeneral>
@@ -71,59 +101,69 @@ export default function ProductPage() {
 						<img src="https://evashopping.vn/products/danhmuc/1610774315banner-do-boi-nu.jpg" />
 					</div>
 					<div className="header-name-product">Đồ bơi nữ</div>
-					<div className="filer-product">
-						{category?.map(item=>{
-							const isExist = categorySelected?.find(cate => cate.id===item.id);
-							return (<div className="name-filer" style ={{
-								background : !!isExist ? "#f53f7d" : "",
-								color : !!isExist ? "white" : ""
-							}}
-								onClick = {(e)=>{
-									updateCategorySelected(item);
-								}}
-							>{item.name} </div>)
-						})}
-						<div>
-							<TextField
-								onChange={(e)=>{
-									onQueryChanged(e.target.value)
-								}}
-							/>
-						</div>
-					</div>
-					<div className="list-product">
+					<Grid
+						container
+						justify="space-between"
+						className={clsx(classes.filterContainer)}
+					>
+						<Grid>
+							{category?.map((item) => {
+								const isExist = categorySelected?.find(
+									(cate) => cate.id === item.id
+								);
+								return (
+									<Button
+										className={clsx(
+											classes.buttonFilterCategory
+										)}
+										variant={
+											!!isExist ? "contained" : "outlined"
+										}
+										color={"primary"}
+										onClick={(e) => {
+											updateCategorySelected(item);
+										}}
+									>
+										{item.name}
+									</Button>
+								);
+							})}
+						</Grid>
+						<Grid>
+							<FormControl variant="outlined">
+								<InputLabel>{"Tìm kiếm"}</InputLabel>
+								<OutlinedInput
+									// className={props.className}
+									style={{ minWidth: "300px" }}
+									onChange={(e) => {
+										onQueryChanged(e.target.value);
+									}}
+									label={"Tìm kiếm"}
+									endAdornment={<SearchIcon />}
+									type={"text"}
+								/>
+							</FormControl>
+						</Grid>
+					</Grid>
+					<Grid className={clsx(classes.root)}>
 						{listProduct?.rows?.map((item) => {
 							return (
-								<div className="fr-product" onClick = {(e)=>{
-									history.push(`product/${item.id}`)
-								}}>
-									<div className="product">
-										<div className="img-product">
-											<img src={item.productImage?.length ? item.image :item.image} alt="" />
-										</div>
-										<div className="content-product">
-											<div className="name-price-product">
-												<div className="name-product">
-													{item.name}
-												</div>
-												<div className="price-product">
-													{item.priceSale}$
-												</div>
-											</div>
-											<div className="vote-product">
-												<div className="number-vote">
-													<div>*****</div>
-													<div>Đánh giá</div>
-												</div>
-												<div className="title"></div>
-											</div>
-										</div>
-									</div>
-								</div>
+								<ProductItem
+									item={item}
+									onSeeDetail={(item) => {
+										history.push(
+											`product/${item.id}` || ""
+										);
+									}}
+								/>
 							);
 						})}
-					</div>
-					<div className="pagination">
+					</Grid>
+					<Grid
+						className={clsx(classes.pagination)}
+						container
+						justify="center"
+					>
 						<Pagination
 							count={listProduct.totalPages}
 							onChange={(e, page) => {
@@ -134,7 +174,7 @@ export default function ProductPage() {
 							}}
 							color="primary"
 						/>
-					</div>
+					</Grid>
 				</div>
 			</div>
 		</ContainerGeneral>

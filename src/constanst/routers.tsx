@@ -1,7 +1,6 @@
 import * as links from "./links"
 import React from 'react';
 import { RouteComponentProps, StaticContext } from "react-router";
-import Home from "../container/ProductPage";
 import Login from "../../src/container/Login";
 import Register from "../../src/container/ Register";
 import ProductPage from "../container/ProductPage";
@@ -11,15 +10,11 @@ import InfoCustomer from "../container/InfoCustomer";
 import ConfirmCart from "../container/ConfirmCart";
 import ProductPageAdmin from "../container/ProductPageAdmin";
 import CategoryAdmin from "../container/CategoryAdmin";
+import Checkout from "../container/Checkout";
 export const routes: Routers[] = [
 	{
 		url: links.ListProduct,
 		component:  ()=><ProductPage></ProductPage>,
-		exact: true,
-	},
-	{
-		url: links.CartProduct,
-		component:  ()=><CartPage></CartPage>,
 		exact: true,
 	},
 	{
@@ -57,6 +52,13 @@ export const routes: Routers[] = [
 		component:  ()=><CategoryAdmin/>,
 		exact: true,
 	},
+	{
+		url: links.checkout,
+		component:  ()=><Checkout/>,
+		exact: true,
+	},
+
+
 
 
 	

@@ -82,7 +82,7 @@ export default function PageAdmin(props: Props) {
 					))}
 				</List>
 				<Divider />
-				<List>
+				{/* <List>
 					{["All mail", "Trash", "Spam"].map((text, index) => (
 						<ListItem
 							button
@@ -102,7 +102,7 @@ export default function PageAdmin(props: Props) {
 							/>
 						</ListItem>
 					))}
-				</List>
+				</List> */}
 			</Grid>
 			<Grid className={clsx(classes.main)} container>
 				{props.children}

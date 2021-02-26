@@ -1,38 +1,85 @@
+import classes from "*.module.css";
+import { Paper, Tabs, Tab, makeStyles, Grid } from "@material-ui/core";
 import React from "react";
+import clsx from "clsx";
+import * as links from  "../../constanst/links"
+import {useHistory, useRouteMatch, useParams, useLocation} from "react-router"
 type Props = {
-	children: React.ReactElement[] | React.ReactElement ;
+	children: React.ReactElement[] | React.ReactElement;
 };
+
+const useStyles = makeStyles((theme) => ({
+	itemMenu: {
+		height: 70,
+	},
+	frMenu: {
+		position : "fixed",
+		top : 0,
+		left : 0,
+		width : "100%",
+		background : "white",
+		zIndex : 100
+	},
+}));
 export default function ContainerGeneral(props: Props) {
+	const matchRoute = useRouteMatch(); 
+	const history = useHistory();
+	const [route, setRoute] = React.useState<any>(matchRoute.path);
+	const classes = useStyles();
+
+	const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+		setRoute(newValue)
+		history.push(newValue)
+	};
 	return (
 		<div>
-			<nav className="fr-menu">
-				<div className="menu">
-					<div className="menu-item">
-						<img src="https://evashopping.vn/images/logo.png"></img>
-					</div>
-					<div className="menu-item">
-						<p>Đồ bơi nam</p>
-					</div>
-					<div className="menu-item">
-						<p>Đồ bơi nữ</p>
-					</div>
-					<div className="menu-item">
-						<p>Đồ bơi trẻ em</p>
-					</div>
-					<div className="menu-item">
-						<p>Đồ bơi đi biển</p>
-					</div>
-					<div className="menu-item">
-						<p>Phụ kiện</p>
-					</div>
-					<div className="menu-item">
-						<p>Big size</p>
-					</div>
-					<div className="menu-item">
-						<p>Login</p>
-					</div>
-				</div>
-			</nav>
+			<Paper className = {clsx(classes.frMenu)}>
+				<Grid container xs={10}>
+					<Grid item xs={10}>
+						<Tabs
+							value={route}
+							onChange={handleChange}
+							indicatorColor="primary"
+							textColor="primary"
+							centered
+							className={clsx(classes.itemMenu)}
+						>
+							<Tab
+								label={
+									<img src="https://evashopping.vn/images/logo.png" />
+								}
+								value={"/home"}
+							/>
+							<Tab
+								className={clsx(classes.itemMenu)}
+								label="Trang chủ"
+								value={"/home"}
+							/>
+							<Tab
+								className={clsx(classes.itemMenu)}
+								label="Sản phẩm"
+								value={links.ListProduct}
+							/>
+							<Tab
+								className={clsx(classes.itemMenu)}
+								label="admin"
+								value={links.productAdmin}
+							/>
+							<Tab
+								className={clsx(classes.itemMenu)}
+								label="Giỏ hàng"
+								value={links.checkout}
+							/>
+							<Tab
+								className={clsx(classes.itemMenu)}
+								label="Đăng nhập"
+								value={links.LOGIN}
+							/>
+						</Tabs>
+					</Grid>
+				</Grid>
+			</Paper>
+
 			<div style={{ padding: 35 }} />
 
 			{props.children}
@@ -109,14 +156,12 @@ export default function ContainerGeneral(props: Props) {
 				</div>
 				{/* slider */}
 				<div className="slider">
-					<div>
-						DIỆN BIKNI ĐẸP CÙNG EVASHOPPING
-					</div>
-					<img src= "https://evashopping.vn/images/hoa-van.png"/>
+					<div>DIỆN BIKNI ĐẸP CÙNG EVASHOPPING</div>
+					<img src="https://evashopping.vn/images/hoa-van.png" />
 				</div>
 
 				<div className="policy-home">
-					<div className= "info-footer-home">
+					<div className="info-footer-home">
 						<div className="info-footer">
 							<p className="header-info">
 								HOTLINE (8:00 - 21:00)
@@ -146,7 +191,7 @@ export default function ContainerGeneral(props: Props) {
 						</div>
 					</div>
 				</div>
-				<div className= "footer-copyright">
+				<div className="footer-copyright">
 					Copyright © 2021 by LUONGPK01506
 				</div>
 			</footer>

@@ -1,10 +1,9 @@
 import React from "react";
 import FrameLogin from "src/componet/login/FrameLogin";
-import Button from "src/my-component/Button";
 import TextFiled from "src/my-component/TextFiled";
 import { useFormik } from "formik";
 import { accountController } from "src/controller";
-import { Account } from "src/submodules/model-shopping/model/Account";
+import { Account, TypeAccount } from "src/submodules/model-shopping/model/Account";
 import { useHistory } from "react-router";
 import { link } from "fs";
 import { REGISTER } from "src/constanst/links";
@@ -17,7 +16,33 @@ import {
 	provideGitHub,
 } from "src/config/FirebaseConfig";
 import firebase from "firebase";
+import classes from "*.module.css";
+import { Container, CssBaseline, Avatar, Typography, TextField, FormControlLabel, Checkbox, Grid, Link, Box, makeStyles, Button } from "@material-ui/core";
+import { Copyright } from "@material-ui/icons";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 // import { history } from "src/App";
+
+
+const useStyles = makeStyles((theme) => ({
+	paper: {
+	  marginTop: theme.spacing(8),
+	  display: 'flex',
+	  flexDirection: 'column',
+	  alignItems: 'center',
+	},
+	avatar: {
+	  margin: theme.spacing(1),
+	  backgroundColor: theme.palette.secondary.main,
+	},
+	form: {
+	  width: '100%', // Fix IE 11 issue.
+	  marginTop: theme.spacing(1),
+	},
+	submit: {
+	  margin: theme.spacing(3, 0, 2),
+	},
+  }));
 
 const validate = yup.object({
 	username: yup
@@ -28,6 +53,7 @@ const validate = yup.object({
 	password: yup.string().trim().required("Không được để trống"),
 });
 export default function Login() {
+	const classes = useStyles();
 	const history = useHistory();
 	provideGitHub.setCustomParameters({
 		allow_signup: "false",
@@ -51,7 +77,7 @@ export default function Login() {
 	const login = (username: string, password: string) => {
 		accountController.login(username, password).then((res) => {
 			if (res) {
-				history.push("/");
+				history.push("/products");
 			}
 		});
 	};
@@ -59,107 +85,98 @@ export default function Login() {
 	const loginWithFirebase = (myProvider: any) => {
 		authFirebase
 			.signInWithPopup(myProvider)
-			.then((result) => {
+			.then((result:any) => {
 				console.log(result);
-				/** @type {firebase.auth.OAuthCredential} */
-				var credential = result.credential;
-
-				// This gives you a Google Access Token. You can use it to access the Google API.
-				//   var token = result.accessToken;
-				// The signed-in user info.
-				var user = result.user;
-				history.push("/");
-				// ...
+				var user = result.additionalUserInfo.profile;
+				console.log(user.id );
+				accountController.save({
+					id : user.id,
+					password : user.id,
+					username : user.id,
+					type : TypeAccount.normal
+					
+				})
+				// history.push("/");
 			})
 			.catch((error) => {
-				// Handle Errors here.
-				var errorCode = error.code;
-				var errorMessage = error.message;
-				// The email of the user's account used.
-				var email = error.email;
-				// The firebase.auth.AuthCredential type that was used.
-				var credential = error.credential;
+				console.log("lôi")
 				// ...
 			});
 	};
 	return (
-		<div>
-			<FrameLogin title="Login">
-				<div className="fr-input-login">
-					{/* <div className="fr-input-login">
-						<Button
-							onClick={() => {
-								loginWithFirebase(
-									provideFacebook.addScope("repo")
-								);
-							}}
-						>
-							Login with Facebook
-						</Button>
-					</div> */}
-
-					<div className="fr-input-login">
-						<Button
-							onClick={() => {
-								loginWithFirebase(
-									provideGoogle.addScope(
-										"https://www.googleapis.com/auth/contacts.readonly"
-									)
-								);
-							}}
-						>
-							Login with google
-						</Button>
-					</div>
-
-					<div className="fr-input-login">
-						<TextFiled
-							name="username"
-							onChange={formik.handleChange}
-							value={formik.values.username}
-							label="user"
-							textHelper={
-								formik.touched.username
-									? formik.errors.username
-									: ""
-							}
-						></TextFiled>
-					</div>
-
-					<div className="fr-input-login">
-						<TextFiled
-							onChange={formik.handleChange}
-							value={formik.values.password}
-							label="password"
-							name="password"
-							type="password"
-							textHelper={
-								formik.touched.password
-									? formik.errors.password
-									: ""
-							}
-						></TextFiled>
-					</div>
-
-					<div className="fr-input-login">
-						<Button onClick={() => customerSubmit()}>
-							Đăng nhập
-						</Button>
-					</div>
-
-					<div className="text-resister">
-						Bạn chưa có tài khoản ?
-						<div
-							className="link-login"
-							onClick={(e) => {
-								history.push(REGISTER);
-							}}
-						>
-							Đăng kí
-						</div>
-					</div>
-				</div>
-			</FrameLogin>
-		</div>
+		<Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form className={classes.form} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Tên đăng nhập"
+            name="username"
+            autoComplete="none"
+            autoFocus
+			value = {formik.values.username}
+			onChange = {formik.handleChange}
+			helperText = {formik.touched.username &&formik.errors.username}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+			value = {formik.values.password}
+            autoComplete="current-password"
+			onChange = {formik.handleChange}
+			helperText = {formik.touched.password &&formik.errors.password}
+          />
+          {/* <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          /> */}
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+			onClick = {()=>{
+				customerSubmit()
+			}}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2" onClick = {()=>{
+				  loginWithFirebase(
+					provideGoogle.addScope(
+						"https://www.googleapis.com/auth/contacts.readonly"
+					)
+				);
+			  }}>
+                Đăng nhập với google
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="/register" variant="body2">
+                {"Bạn đã có tài khoản chưa? Đăng nhập"}
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
+    </Container>
 	);
 }

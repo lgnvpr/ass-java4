@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme) => ({
 		gridAutoRows: "repeat(auto, 210px)",
 		padding: 10,
 	},
-	filterContainer : {
-		padding : 50
+	filterContainer: {
+		padding: 50,
 	},
-	buttonFilterCategory : {
-		marginRight : 10
-	}
+	buttonFilterCategory: {
+		marginRight: 10,
+	},
 }));
 export default function ProductPageAdmin() {
 	const classes = useStyles();
@@ -53,7 +53,7 @@ export default function ProductPageAdmin() {
 
 	const [query, setQuery] = useState<ListFilter<Product>>({
 		pageSize: 20,
-		sort : ["-created_at"]
+		sort: ["-created_at"],
 	});
 
 	function updateCategorySelected(item: CategoryProduct) {
@@ -91,9 +91,7 @@ export default function ProductPageAdmin() {
 
 	const [showForm, setShowForm] = useState<boolean>(false);
 	const [showConfirm, setShowConfirm] = useState<boolean>(false);
-	const [selected, setSelected] = useState<Product>(
-		{} as Product
-	);
+	const [selected, setSelected] = useState<Product>({} as Product);
 
 	function onConfirm(item: Product) {
 		setSelected(item);
@@ -139,36 +137,41 @@ export default function ProductPageAdmin() {
 				onDelete={onDelete}
 			/>
 			<PopupProductAdmin
-				category = {category || []}
-				isDisplay = {showForm}
-				obj = {selected}
-				onCancel ={onCloseForm}
-				onSave = {onSave}
+				category={category || []}
+				isDisplay={showForm}
+				obj={selected}
+				onCancel={onCloseForm}
+				onSave={onSave}
 			/>
 			<Grid container>
 				<Typography variant={"h5"}>Product</Typography>
-				<Button
-					onClick = {()=>{
-						onCreateOrUpdate({})
-					}}
-				>Thêm</Button>
-				<Grid container justify="space-evenly" className = {clsx(classes.filterContainer)}>
+				<Grid
+					container
+					alignItems = "flex-end"
+					justify="space-evenly"
+					className={clsx(classes.filterContainer)}
+				>
 					<Grid>
 						{category?.map((item) => {
-							const isExist = categorySelected?.find(cate => cate.id===item.id);
+							const isExist = categorySelected?.find(
+								(cate) => cate.id === item.id
+							);
 							return (
 								<Button
-									className = {clsx(classes.buttonFilterCategory)}
-									variant = {!!isExist ? "contained" : "outlined"}
-									color = {"primary"}
+									className={clsx(
+										classes.buttonFilterCategory
+									)}
+									variant={
+										!!isExist ? "contained" : "outlined"
+									}
+									color={"primary"}
 									onClick={(e) => {
 										updateCategorySelected(item);
 									}}
-									
 								>
 									{item.name}
 								</Button>
-							)
+							);
 						})}
 					</Grid>
 					<Grid>
@@ -190,13 +193,27 @@ export default function ProductPageAdmin() {
 							color="primary"
 						/>
 					</Grid>
+					<Grid>
+						<Button
+							onClick={() => {
+								onCreateOrUpdate({});
+							}}
+							variant ="contained"
+							color  = "primary"
+						>
+							Thêm
+						</Button>
+					</Grid>
 				</Grid>
 				<Grid className={clsx(classes.root)} container>
 					{listProduct.rows?.map((item) => {
-						return <ProductAdmin item={item} 
-							onDelete = {onConfirm}
-							onEdit = {onCreateOrUpdate}
-						/>;
+						return (
+							<ProductAdmin
+								item={item}
+								onDelete={onConfirm}
+								onEdit={onCreateOrUpdate}
+							/>
+						);
 					})}
 				</Grid>
 			</Grid>
