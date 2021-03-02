@@ -47,10 +47,10 @@ export default function Register() {
 		})
 	}
 	const login = (username: string , password: string)=>{
-		accountController.save({username, password}).then(res=>{
+		accountController.register({username, password}).then(res=>{
 			console.log(res)
 			if(res){
-				history.push("/")
+				history.push("/products")
 			}
 		})
 	}

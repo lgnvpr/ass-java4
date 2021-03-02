@@ -7,11 +7,12 @@ import {
 	ListItemText,
 	makeStyles,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 
 import { AiOutlineMail } from "react-icons/ai";
 import {useHistory} from "react-router"
+import { accountController } from "src/controller";
 type Props = {
 	children: React.ReactElement[] | React.ReactElement;
 };
@@ -54,6 +55,8 @@ const listItem: NavBar[] = [
 export default function PageAdmin(props: Props) {
 	const history = useHistory();
 	const classes = useStyles();
+	useEffect(() => {
+	}, [])
 	return (
 		<Grid>
 			<Grid className={clsx(classes.menu)}>

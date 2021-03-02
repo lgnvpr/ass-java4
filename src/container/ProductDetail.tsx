@@ -25,14 +25,14 @@ const useStyles = makeStyles((theme) => ({
 	name: {
 		fontWeight: 550,
 		paddingTop: theme.spacing(1),
-		paddingBottom : theme.spacing(1),
+		paddingBottom: theme.spacing(1),
 		fontSize: "1.5rem",
 	},
 	price: {
 		color: theme.palette.primary.main,
 		fontSize: "2rem",
 		paddingTop: theme.spacing(1),
-		paddingBottom : theme.spacing(1),
+		paddingBottom: theme.spacing(1),
 	},
 	titleOption: {
 		fontWeight: 550,
@@ -47,8 +47,7 @@ export default function ProductDetail() {
 
 	const addToCart = (item: Product) => {
 		cartProductController.addToCart({
-			productId: item.id,
-			customerId: "0cb2b898-063f-4f05-b7d8-8ebd44658fb6",
+			productId: item.id
 		});
 	};
 	useEffect(() => {
@@ -73,8 +72,9 @@ export default function ProductDetail() {
 				<Grid className={clsx(classes.frImg)}>
 					<SliderImage
 						img={
-							product?.productImage?.map((item) => item.link) ||
-							[]
+							product?.productImage?.map(
+								(item) => item.link || ""
+							) || []
 						}
 					/>
 				</Grid>
@@ -136,6 +136,11 @@ export default function ProductDetail() {
 							variant="contained"
 							color="primary"
 							className={clsx(globalStyles.mr2)}
+							onClick={(e) => {
+								if (product) {
+									addToCart(product);
+								}
+							}}
 						>
 							Thêm vào giỏ
 						</Button>
@@ -145,7 +150,7 @@ export default function ProductDetail() {
 					</Grid>
 				</Grid>
 				<Grid>
-					<Comments href = {`http://localhost:3000/${product?.id}`}/>
+					<Comments href={`http://localhost:3000/${product?.id}`} />
 				</Grid>
 			</Grid>
 		</ContainerGeneral>

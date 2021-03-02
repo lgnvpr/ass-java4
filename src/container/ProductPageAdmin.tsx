@@ -5,7 +5,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import ContainerGeneral from "src/componet/home/ContainerGeneral";
 import RuleItem from "src/componet/home/RuleItem";
 import ProductItem from "src/componet/product/ProductItem";
-import { categoryController, productController } from "src/controller";
+import {
+	accountController,
+	categoryController,
+	productController,
+} from "src/controller";
 import { CategoryProduct } from "src/submodules/model-shopping/model/CategoryProduct";
 import { Product } from "src/submodules/model-shopping/model/Product";
 import { useHistory } from "react-router";
@@ -122,12 +126,15 @@ export default function ProductPageAdmin() {
 	}
 
 	useEffect(() => {
-		productController.list(query).then((res) => {
-			setListProduct(res);
-		});
-		categoryController.find().then((item) => {
-			setCategory(item);
-		});
+		accountController.checkAdmin().then(res=>{
+			productController.list(query).then((res) => {
+				setListProduct(res);
+			});
+			categoryController.find().then((item) => {
+				setCategory(item);
+			});
+		})
+		
 	}, [query]);
 	return (
 		<PageAdmin>
@@ -147,7 +154,7 @@ export default function ProductPageAdmin() {
 				<Typography variant={"h5"}>Product</Typography>
 				<Grid
 					container
-					alignItems = "flex-end"
+					alignItems="flex-end"
 					justify="space-evenly"
 					className={clsx(classes.filterContainer)}
 				>
@@ -198,8 +205,8 @@ export default function ProductPageAdmin() {
 							onClick={() => {
 								onCreateOrUpdate({});
 							}}
-							variant ="contained"
-							color  = "primary"
+							variant="contained"
+							color="primary"
 						>
 							Thêm
 						</Button>

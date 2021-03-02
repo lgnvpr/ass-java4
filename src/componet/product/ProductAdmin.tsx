@@ -46,7 +46,7 @@ export default function ProductAdmin(props: Props) {
 				<Grid className={clsx(classes.frImg)}>
 					<img
 						className={clsx(classes.frImg, classes.img)}
-						src={props.item.image}
+						src={props.item.productImage ? props.item.productImage[0].link : "" }
 						alt=""
 					/>
 				</Grid>

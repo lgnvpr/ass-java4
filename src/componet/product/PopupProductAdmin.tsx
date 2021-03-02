@@ -1,4 +1,13 @@
-import { Dialog, DialogContent, Grid, TextField } from "@material-ui/core";
+import {
+	Badge,
+	Button,
+	Dialog,
+	DialogContent,
+	Grid,
+	IconButton,
+	makeStyles,
+	TextField,
+} from "@material-ui/core";
 import { useFormik } from "formik";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -8,7 +17,10 @@ import BaseDialog from "../genaral-component/BaseDialog";
 import * as Yup from "yup";
 import { Product } from "src/submodules/model-shopping/model/Product";
 import { Autocomplete } from "@material-ui/lab";
-
+import ImageUploading, { ImageListType } from "react-images-uploading";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { ImageProduct } from "src/submodules/model-shopping/model/ImageProduct";
+var base64 = require("base-64");
 interface Props {
 	titlePopup?: string;
 	obj: Product;
@@ -20,10 +32,38 @@ interface Props {
 const validate = Yup.object().shape({
 	name: Yup.string().required("Không được để trống tên"),
 });
+
+const useStyles = makeStyles((theme) => ({
+	frImg: {
+		width: 100,
+		height: 100,
+		overflow: "hidden",
+		position : "relative",
+		margin : 5,
+		padding : 10
+
+	},
+	img: {
+		height: "100%",
+	},
+	deleteImg: {
+		position : "absolute",
+		top : 0,
+		left : 0,
+		background : "white",
+		height : 10,
+		width : 10,
+		zIndex : 5,
+		"&:hover": {
+			background : "white",
+		}
+	},
+}));
 export default function PopupProductAdmin(props: Props) {
+	const classes = useStyles();
 	const globalStyles = useGlobalStyles();
 	const { isDisplay, onCancel, onSave, titlePopup } = props;
-	const [data, setData] = useState<Product>({} as Product);
+	const [data, setData] = useState<any>();
 
 	const formik = useFormik<Product>({
 		initialValues: {},
@@ -41,6 +81,27 @@ export default function PopupProductAdmin(props: Props) {
 			name: true,
 			image: true,
 			description: true,
+		});
+	}
+
+	const onChange = (imageList: ImageListType) => {
+		let imgs = formik.values.productImage || [];
+		imgs.push({
+			link: imageList[0].dataURL || "",
+		});
+		formik.setValues({
+			...formik.values,
+			productImage: imgs,
+		});
+	};
+
+	const onRemoveImage = (img : ImageProduct)=>{
+		let imgs = formik.values.productImage || [];
+		imgs=imgs.filter(item=> item.id != img.id);
+
+		formik.setValues({
+			...formik.values,
+			productImage: imgs,
 		});
 	}
 	useEffect(() => {
@@ -134,11 +195,11 @@ export default function PopupProductAdmin(props: Props) {
 					value={props.category.find(
 						(item) => item.id === formik.values.categoryProductId
 					)}
-					onChange = {(e, value )=>{
+					onChange={(e, value) => {
 						formik.setValues({
 							...formik.values,
-							categoryProductId : value?.id || ""
-						})
+							categoryProductId: value?.id || "",
+						});
 					}}
 					renderInput={(params) => (
 						<TextField
@@ -148,6 +209,42 @@ export default function PopupProductAdmin(props: Props) {
 						/>
 					)}
 				/>
+			</Grid>
+			<Grid container wrap={"wrap"} direction="row">
+				{formik.values?.productImage?.map((item) => {
+					return (
+						<Grid className={classes.frImg}>
+							<IconButton className={classes.deleteImg} onClick = {(e)=> {onRemoveImage(item)}}>
+								<HighlightOffIcon color = {"primary"} />
+							</IconButton>
+							<img className={classes.img} src={item.link}></img>
+						</Grid>
+					);
+				})}
+
+				<ImageUploading
+					multiple
+					value={[]}
+					onChange={onChange}
+					maxNumber={10}
+				>
+					{({ onImageUpload, isDragging, dragProps }) => (
+						// write your building UI
+						<Grid className={classes.frImg}>
+							<Button
+								className={classes.img}
+								variant={"outlined"}
+								style={
+									isDragging ? { color: "red" } : undefined
+								}
+								onClick={onImageUpload}
+								{...dragProps}
+							>
+								+
+							</Button>
+						</Grid>
+					)}
+				</ImageUploading>
 			</Grid>
 		</BaseDialog>
 	);

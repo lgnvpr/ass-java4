@@ -4,6 +4,7 @@ export class Account extends BaseModel{
     username ?: string;
     password ?: string;
     type ?: TypeAccount;
+    userId ?: string
 }
 
 export enum TypeAccount {

@@ -1,7 +1,12 @@
 import { createModel } from "@rematch/core";
+import { createNewModel } from "./Type";
 
+export interface ActionLoadingTop {
+  showLoad:()=>void
+  hiddenLoad:()=> void
+}
 
-export const loadingTop = createModel<boolean>({
+export const loadingTop = createNewModel<boolean , ActionLoadingTop>({
   state: false,
   reducers: {
     update(state: any, data: boolean = false) {
@@ -9,14 +14,15 @@ export const loadingTop = createModel<boolean>({
       // return state;
     },
   },
-  effects: (dispatch: any) => ({
+  effects: (dispatch) => ({
     showLoad() {
       const loading: boolean = true;
-      this.update(loading);
+      dispatch.loadingTop.update(loading)
     },
     hiddenLoad() {
       const loading: boolean = false;
-      this.update(loading);
+      dispatch.loadingTop.update(loading)
+
     }
 
   }),

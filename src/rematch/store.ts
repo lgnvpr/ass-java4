@@ -1,5 +1,5 @@
 import { init, RematchDispatch, RematchRootState } from "@rematch/core";
-import { AppModel, models } from "./index";
+import {  ActionRematch, models } from "./index";
 import { reducer as formReducer } from 'redux-form';
 
 import { connectRouter, routerMiddleware } from 'connected-react-router';
@@ -32,7 +32,12 @@ export const store = init({
 })
 
 export type Store = typeof store
-export type Dispatch = RematchDispatch<AppModel>
-export type AppState = RematchRootState<AppModel>
+export type Dispatch = ActionRematch
+export type AppState = RematchRootState<any>
 
-export const { dispatch } = store
+
+
+export const  dispatch: Dispatch  = store.dispatch as any
+
+
+

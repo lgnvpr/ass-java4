@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { LinearProgress, makeStyles, Snackbar } from "@material-ui/core";
-import { AppModel } from "../../rematch";
 import { AppState } from "../../rematch/store";
 import { Alert } from "@material-ui/lab";
 import { NotificationModel } from "../../rematch/Notification";

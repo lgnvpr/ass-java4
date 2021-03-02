@@ -35,7 +35,7 @@ export default function ProductItem(props: Props) {
 		}}>
 			<Grid className={clsx(classes.root)}>
 				<Grid className={clsx(classes.frImg)}>
-					<img src={props.item.image || ""}></img>
+					<img src={props.item?.productImage ?  props.item?.productImage[0]?.link : ""}></img>
 				</Grid>
 				<Grid
 					className={clsx(classes.content)}

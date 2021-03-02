@@ -1,5 +1,6 @@
 import { createModel } from "@rematch/core";
 import { VariantType } from "notistack";
+import { createNewModel } from "./Type";
 
 
 export type NotificationModel = {
@@ -8,9 +9,13 @@ export type NotificationModel = {
 	latestAt?: Date;
 };
 
-// export type NotificationDispatch = {
-// 	pushMessage(payload: { message: string; variant: VariantType }): void;
-// };
+export interface NotificationAction  {
+	error: (message: string, state?: any) => void
+
+	success:(message: string, state?: any) => void
+
+	info: (message: string, state?: any) => void
+};
 
 export enum VariantTypeEnum {
 	default = "default",
@@ -21,14 +26,13 @@ export enum VariantTypeEnum {
 }
 
 
-const initState: NotificationModel = {
-	latestAt: new Date(),
-	message: "",
-	variant: "success"
-};
 
-export const notification = createModel<NotificationModel>({
-	state: initState,
+export const notification = createNewModel<NotificationModel, NotificationAction>({
+	state:  {
+		latestAt: new Date(),
+		message: "",
+		variant: "success"
+	},
 	reducers: {
 		update(state: NotificationModel, data: any = {}) {
 			state = {
@@ -38,8 +42,8 @@ export const notification = createModel<NotificationModel>({
 			return state;
 		},
 	},
-	effects: (dispatch: any) => ({
-		error(message: string, state: any) {
+	effects: (dispatch) => ({
+		error(message: string, state?: any) {
 			const updatedState: NotificationModel = {
 				...state.notification,
 				message: message,

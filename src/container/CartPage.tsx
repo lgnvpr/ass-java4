@@ -24,10 +24,18 @@ export default function CartPage(props : Props) {
 	const [cartProduct, setCartProduct] = useState<CartProduct[]>();
 	const [query, setQuery] = useState<ListFilter<CartProduct>>({
 		pageSize: 1000,
+		filter :[{
+			filed : "customerId",
+			value : ["0cb2b898-063f-4f05-b7d8-8ebd44658fb6"]
+		}]
 	});
 
 	const updateItem = (item: CartProduct) => {
-		cartProductController.save(item).then((res) => {
+		// 
+		cartProductController.save({
+			...item,
+			customerId : "0cb2b898-063f-4f05-b7d8-8ebd44658fb6" 
+		}).then((res) => {
 			setQuery({ ...query });
 		});
 	};
